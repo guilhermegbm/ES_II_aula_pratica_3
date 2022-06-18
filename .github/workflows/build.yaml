@@ -1,3 +1,4 @@
+# Check https://www.youtube.com/watch?v=oW5MOjv6kBo for some interesting tips
 #Workflow name
 name: CI/CD Pipeline
 on:
@@ -10,7 +11,7 @@ on:
 jobs:
   #Unit tests on Ubuntu
   run-tests-on-ubuntu:
-    name: Run Unit tests
+    name: Run Unit tests on Ubuntu
     #Run on Ubuntu using the latest version
     runs-on: ubuntu-latest
     #Job's steps
@@ -36,7 +37,7 @@ jobs:
 
   #Unit tests on Windows
   run-tests-on-windows:
-    name: Run Unit tests
+    name: Run Unit tests on Windows
     #Run on Windows using the latest version
     runs-on: windows-latest
     #Job's steps
@@ -62,7 +63,7 @@ jobs:
    
   #Unit tests on Mac   
   run-tests-on-macos:
-    name: Run Unit tests
+    name: Run Unit tests on MacOS
     #Run on Mac OS using the latest version
     runs-on: macos-latest
     #Job's steps
