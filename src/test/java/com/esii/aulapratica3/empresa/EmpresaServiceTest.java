@@ -2,6 +2,7 @@ package com.esii.aulapratica3.empresa;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -53,5 +54,23 @@ public class EmpresaServiceTest {
 		assertEquals(1l, eTest.getId());
 
 		verify(this.empresaRepository, times(1)).findByCNPJ(anyString());
+	}
+
+	@Test
+	void testBuscarPorCNPJNulo() {
+		RuntimeException e = assertThrows(RuntimeException.class, () -> {
+			this.empresaService.buscarEmpresaPorCNPJ(null);
+		});
+
+		assertEquals("O CNPJ é obrigatório", e.getMessage());
+	}
+
+	@Test
+	void testBuscarPorCNPJVazio() {
+		RuntimeException e = assertThrows(RuntimeException.class, () -> {
+			this.empresaService.buscarEmpresaPorCNPJ("");
+		});
+
+		assertEquals("O CNPJ é obrigatório", e.getMessage());
 	}
 }
