@@ -8,11 +8,63 @@ on:
     branches:
       - main
 jobs:
-  #Test's job
-  run-tests:
+  #Unit tests on Ubuntu
+  run-tests-on-ubuntu:
     name: Run Unit tests
     #Run on Ubuntu using the latest version
     runs-on: ubuntu-latest
+    #Job's steps
+    steps:
+      #Check-out your repository under $GITHUB_WORKSPACE, so your workflow can access it
+      - uses: actions/checkout@v1
+      #Set up JDK 11
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+      #Set up Maven cache
+      - name: Cache Maven packages
+        #This action allows caching dependencies and build outputs to improve workflow execution time.
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      #Run Unit Tests
+      - name: Run Unit Tests
+        run: mvn -B -Dtest=*Test test
+
+  #Unit tests on Windows
+  run-tests-on-windows:
+    name: Run Unit tests
+    #Run on Windows using the latest version
+    runs-on: windows-latest
+    #Job's steps
+    steps:
+      #Check-out your repository under $GITHUB_WORKSPACE, so your workflow can access it
+      - uses: actions/checkout@v1
+      #Set up JDK 11
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+      #Set up Maven cache
+      - name: Cache Maven packages
+        #This action allows caching dependencies and build outputs to improve workflow execution time.
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      #Run Unit Tests
+      - name: Run Unit Tests
+        run: mvn -B -Dtest=*Test test
+   
+  #Unit tests on Mac   
+  run-tests-on-macos:
+    name: Run Unit tests
+    #Run on Mac OS using the latest version
+    runs-on: macos-latest
     #Job's steps
     steps:
       #Check-out your repository under $GITHUB_WORKSPACE, so your workflow can access it
