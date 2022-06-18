@@ -3,14 +3,14 @@ name: CI/CD Pipeline
 on:
   #Manually trigger workflow runs
   workflow_dispatch:
-  #Trigger the workflow on push from the master branch
+  #Trigger the workflow on push from the main branch
   push:
     branches:
-      - master
+      - main
 jobs:
   #Test's job
   run-tests:
-    name: Run Unit and Integration tests
+    name: Run Unit tests
     #Run on Ubuntu using the latest version
     runs-on: ubuntu-latest
     #Job's steps
